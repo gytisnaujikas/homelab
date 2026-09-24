@@ -15,3 +15,7 @@ Personal homelab for learning Infrastructure, Cloud and DevOps.
 - Kubernetes
 - Monitoring
 - DevSecOps
+
+- ## Status
+
+Homelab is actively being developed.
