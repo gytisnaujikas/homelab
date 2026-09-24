@@ -1,21 +1,28 @@
-# Homelab
+# 🏠Homelab
 
-Personal homelab for learning Infrastructure, Cloud and DevOps.
+Infrastructure, Cloud & DevOps learning environment running on Proxmox.
 
-## Goals
+## Stack
 
-- Linux administration
-- Networking
-- Docker
-- Git
-- Ansible
-- CI/CD
-- Azure
-- Terraform
-- Kubernetes
-- Monitoring
-- DevSecOps
+- Proxmox VE 9
+- Ubuntu Server
+- Docker & Docker Compose
+- Git & GitHub
+- Plex (LXC)
+- Tailscale
+- Azure (learning)
+- Monitoring (coming soon)
 
-- ## Status
+## Roadmap
 
-Homelab is actively being developed.
+- [x] Git
+- [x] Docker basics
+- [x] Tailscale SSH
+- [ ] Docker Networking
+- [ ] Homepage Dashboard
+- [ ] Uptime Kuma
+- [ ] Grafana
+- [ ] Prometheus
+- [ ] Ansible
+- [ ] Terraform
+- [ ] Kubernetes
