@@ -28,8 +28,19 @@ jobs:
         run: |
           for i in {1..10}; do
             if curl -f http://localhost:8080/health; then
-              exit 0
+              break
             fi
             sleep 1
           done
-          exit 1
+
+          response=$(curl -fsS http://localhost:8080/)
+
+          echo "Application response:"
+          echo "$response"
+
+          if [ "$response" != "Hello from Python backend!" ]; then
+            echo "Unexpected application response"
+            exit 1
+          fi
+
+          echo "Application test passed"
