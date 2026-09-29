@@ -15,3 +15,9 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t homelab-backend:ci ./docker/python-nginx/backend
+
+      - name: Run container
+        run: docker run -d --name backend-test -p 8080:8080 homelab-backend:ci
+
+      - name: Test application
+        run: curl http://localhost:8080
