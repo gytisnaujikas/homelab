@@ -26,4 +26,10 @@ jobs:
 
       - name: Test application
         run: |
-          curl http://localhost:8080/health
+          for i in {1..10}; do
+            if curl -f http://localhost:8080/health; then
+              exit 0
+            fi
+            sleep 1
+          done
+          exit 1
