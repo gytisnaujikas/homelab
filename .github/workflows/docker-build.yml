@@ -19,6 +19,11 @@ jobs:
       - name: Run container
         run: docker run -d --name backend-test -p 8080:8080 homelab-backend:ci
 
+      - name: Check container
+        run: |
+          docker ps -a
+          docker logs backend-test
+
       - name: Test application
         run: |
           curl http://localhost:8080/health
