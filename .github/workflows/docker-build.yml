@@ -55,9 +55,7 @@ jobs:
 
           echo "Application response:"
           echo "$response"
-
-          if [ "$response" != "Hello from Python backend!" ]; then
-            echo "Unexpected application response"
+          if [ "$response" != "Hello from automatically deployed version 2!" ]; then
             exit 1
           fi
 
