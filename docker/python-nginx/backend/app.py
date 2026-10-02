@@ -12,7 +12,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-Type", "text/plain")
         self.end_headers()
-        self.wfile.write(b"Hello from Python backend!\n")
+        self.wfile.write(b"Hello from CI test!\n")
 
 server = HTTPServer(("0.0.0.0", 8080), Handler)
 print("Backend listening on port 8080")
