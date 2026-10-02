@@ -63,6 +63,23 @@ jobs:
 
           echo "Application test passed"
 
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          authkey: ${{ secrets.TS_AUTHKEY }}
+          ping: 100.126.22.119
+
+      - name: Test SSH connection
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=no \
+            s1tyg@100.126.22.119 \
+            "hostname"
+
       - name: Push Docker image
         run: |
           docker push ghcr.io/gytisnaujikas/homelab-backend:latest
