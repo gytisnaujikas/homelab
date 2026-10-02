@@ -83,3 +83,10 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ghcr.io/gytisnaujikas/homelab-backend:latest
+
+      - name: Deploy to docker01
+        run: |
+          ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=no \
+            s1tyg@100.126.22.119 \
+            "cd ~/homelab/docker/python-nginx && docker compose pull && docker compose up -d"
