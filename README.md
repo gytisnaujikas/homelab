@@ -1,289 +1,154 @@
-🏠 Homelab — Infrastructure, Cloud & DevOps
+# 🏠 Homelab — Infrastructure, Cloud & DevOps
 
-A hands-on homelab built to develop practical skills in Linux administration, networking, containerization, automation, and cloud infrastructure.
+A hands-on homelab built to develop practical skills in **Linux administration, networking, containerization, automation, and cloud infrastructure**.
 
-The environment runs on Proxmox VE and includes Docker workloads, private remote access, version-controlled configuration, and an automated CI/CD pipeline. It serves as a practical learning environment for my transition toward Infrastructure, Cloud, and DevOps Engineering.
+Hosted on Proxmox VE, this environment includes virtual machines, Docker workloads, private remote access, and an automated CI/CD pipeline.
 
-Rather than just following tutorials, I use this environment to build, test, troubleshoot, document, and improve real infrastructure projects.
+## 🎯 Objectives
 
-🎯 Objectives
+- Build and maintain a virtualized infrastructure.
+- Develop Linux administration and networking skills.
+- Deploy containerized applications using Docker Compose.
+- Automate application builds, testing, and deployments.
+- Practice secure remote administration.
+- Explore Azure, Infrastructure as Code, and monitoring.
 
-Build and maintain a virtualized infrastructure.
+## 🏗️ Infrastructure Stack
 
-Develop practical Linux administration and networking skills.
+| Component | Technology | Purpose |
+|---|---|---|
+| Virtualization | Proxmox VE 9 | Virtual machines and containers |
+| Operating System | Ubuntu | Application hosting and Linux administration |
+| Containers | Docker & Docker Compose | Containerized applications |
+| Reverse Proxy | Nginx | Route HTTP requests to backend services |
+| Backend | Python | Web application |
+| CI/CD | GitHub Actions | Automated build, test, and deployment |
+| Container Registry | GitHub Container Registry (GHCR) | Store Docker images |
+| Remote Access | Tailscale & SSH | Private connectivity and administration |
+| Media Server | Plex (LXC) | Separate media workload |
+| Cloud | Microsoft Azure | Cloud administration learning |
 
-Deploy and manage containerized applications with Docker Compose.
+## 🗺️ Architecture
 
-Automate application builds, testing, and deployments.
-
-Practice secure remote administration and private networking.
-
-Explore cloud infrastructure, Infrastructure as Code (IaC), and monitoring.
-
-Document projects and technical decisions in a version-controlled repository.
-
-🏗️ Infrastructure Overview
-
-The homelab is hosted on a Lenovo ThinkCentre M70q running Proxmox VE.
-
-Component
-
-Technology
-
-Purpose
-
-Virtualization
-
-Proxmox VE 9
-
-Host and manage virtual machines and containers
-
-Application environment
-
-Ubuntu VM (docker01)
-
-Run Docker workloads and deployment services
-
-Containerization
-
-Docker & Docker Compose
-
-Package and manage applications
-
-Reverse proxy
-
-Nginx
-
-Route HTTP requests to application services
-
-Application backend
-
-Python
-
-Serve a containerized web application
-
-CI/CD
-
+```text
+GitHub Repository
+       |
+       v
 GitHub Actions
+       |
+       v
+Build & Test Docker Image
+       |
+       v
+GitHub Container Registry
+       |
+       v
+Tailscale + SSH
+       |
+       v
+Proxmox -> Ubuntu VM (docker01)
+                    |
+                    v
+              Docker Compose
+                    |
+              +-----+-----+
+              |           |
+              v           v
+            Nginx      Python Backend
+```
+
+## 🚀 Implemented Projects
+
+### 1. Dockerized Web Application
+
+**Technologies:** Docker, Docker Compose, Nginx, Python
+
+- Deployed a Python backend in a Docker container.
+- Configured Nginx as a reverse proxy.
+- Connected services through Docker Compose networking.
+- Used service-name DNS resolution for backend communication.
+- Implemented a health endpoint.
+- Practiced container lifecycle management and troubleshooting.
+
+### 2. Automated CI/CD Pipeline
+
+**Technologies:** Git, GitHub Actions, Docker, GHCR, SSH, Tailscale
+
+The deployment workflow:
+
+1. Push code changes to GitHub.
+2. Trigger a GitHub Actions workflow.
+3. Build and test the Docker image.
+4. Publish the image to GHCR.
+5. Connect to the homelab through Tailscale and SSH.
+6. Pull the updated image and redeploy the application.
+
+This project demonstrates practical experience with automated builds, container image publishing, and remote application deployment.
+
+### 3. Docker Networking & Nginx
+
+- Configured separate Docker Compose projects.
+- Published services on different host ports.
+- Practiced internal container communication.
+- Used Nginx to forward requests to the Python backend.
+- Troubleshot ports, connectivity, and application availability.
+
+### 4. Virtualization & Remote Administration
+
+- Manage virtual machines and Linux containers with Proxmox.
+- Run Docker workloads on an Ubuntu VM.
+- Maintain a separate Plex LXC container.
+- Use SSH for remote administration.
+- Use Tailscale for private connectivity.
+- Practice Linux service, process, disk, memory, and network diagnostics.
+
+## 🧰 Skills
+
+- **Linux:** Services, processes, logs, storage, networking, troubleshooting
+- **Networking:** IP addressing, DNS, routing, ports, reverse proxies
+- **Containers:** Docker, Docker Compose, images, networking
+- **CI/CD:** GitHub Actions, automated builds, testing, deployments
+- **Version Control:** Git, branches, commits, merges
+- **Remote Access:** SSH, Tailscale
+- **Cloud:** Microsoft Azure fundamentals
+
+## 🛣️ Roadmap
+
+### Completed
+
+- [x] Git and GitHub fundamentals
+- [x] Docker and Docker Compose basics
+- [x] Tailscale remote access and SSH
+- [x] Docker networking
+- [x] Homepage dashboard
+- [x] Nginx reverse proxy
+- [x] Containerized Python backend
+- [x] GitHub Actions CI/CD pipeline
+- [x] Docker image publishing to GHCR
+- [x] Remote application deployment
+
+### In Progress
+
+- [ ] Linux administration and troubleshooting
+- [ ] Microsoft Azure Administrator (AZ-104)
+- [ ] Infrastructure documentation
+
+### Planned
+
+- [ ] Uptime Kuma — service availability monitoring
+- [ ] Prometheus and Grafana — metrics and dashboards
+- [ ] Ansible — configuration management
+- [ ] Terraform — Infrastructure as Code
+- [ ] Kubernetes — container orchestration
+- [ ] Centralized logging
+- [ ] Secrets management and security improvements
 
-Build, test, and publish application images
+## 📚 Learning Approach
 
-Container registry
+Each project focuses on understanding how the components work, how to troubleshoot problems, and how to improve reliability and maintainability.
 
-GitHub Container Registry (GHCR)
+The long-term goal is to build a documented, automated, and observable infrastructure environment that reflects practical Infrastructure, Cloud, and DevOps engineering workflows.
 
-Store versioned Docker images
+---
 
-Remote access
-
-Tailscale & SSH
-
-Access infrastructure remotely
-
-Media services
-
-Plex in an LXC container
-
-Run a separate media server workload
-
-Cloud learning
-
-Microsoft Azure
-
-Develop cloud administration skills
-
-🗺️ Architecture
-
-The following diagram illustrates the main components and the application deployment workflow.
-
-flowchart TB
-    subgraph Host["Proxmox VE Host"]
-        subgraph VM["Ubuntu VM — docker01"]
-            subgraph Docker["Docker Compose"]
-                NGINX["Nginx Reverse Proxy"]
-                APP["Python Backend"]
-                NGINX --> APP
-            end
-        end
-        PLEX["Separate Plex LXC"]
-    end
-
-    USER["Client / Browser"] -->|"HTTP :8082"| NGINX
-
-    DEV["Code Changes"] --> GH["GitHub Repository"]
-    GH --> CI["GitHub Actions"]
-    CI --> TEST["Build & Test"]
-    TEST --> REG["GitHub Container Registry"]
-    REG -->|"Tailscale + SSH"| DEPLOY["Deployment on docker01"]
-    DEPLOY --> Docker
-
-The application is split into separate containers. Nginx receives HTTP requests and forwards them to the Python backend through the Docker Compose network.
-
-The deployment pipeline builds and tests the backend image, publishes it to GHCR, and connects to the homelab over Tailscale and SSH to pull and deploy the updated version.
-
-🚀 Implemented Projects
-
-1. Dockerized Web Application
-
-Technologies: Docker, Docker Compose, Nginx, Python
-
-Deployed a Python backend as a Docker container.
-
-Configured Nginx as a reverse proxy.
-
-Connected application services using Docker Compose networking and service-name DNS resolution.
-
-Published the application through a host port.
-
-Implemented a health endpoint for basic application checks.
-
-Practiced container logs, lifecycle management, and troubleshooting.
-
-2. Automated CI/CD Pipeline
-
-Technologies: Git, GitHub Actions, Docker, GHCR, SSH, Tailscale
-
-Implemented an end-to-end application deployment workflow:
-
-Make and push code changes to GitHub.
-
-Trigger a GitHub Actions workflow.
-
-Build the Docker image and run automated checks.
-
-Publish the image to GitHub Container Registry.
-
-Connect to the homelab deployment environment over Tailscale and SSH.
-
-Pull the updated image and recreate the application containers using Docker Compose.
-
-This project demonstrates practical experience with version control, container image management, automated validation, remote deployment, and application lifecycle management.
-
-3. Docker Networking & Reverse Proxy
-
-Technologies: Docker Compose, Nginx, Linux networking
-
-Configured separate Docker Compose projects.
-
-Exposed applications through distinct host ports.
-
-Practiced internal container-to-container communication.
-
-Used Compose service names for backend discovery.
-
-Investigated listening ports, routing, connectivity, and application availability.
-
-4. Virtualization & Remote Administration
-
-Technologies: Proxmox VE, Ubuntu, LXC, Tailscale, SSH
-
-Manage virtual machines and Linux containers in Proxmox.
-
-Run application workloads separately from the Plex LXC.
-
-Use SSH for remote administration.
-
-Use Tailscale for private connectivity to the homelab.
-
-Practice Linux service management, system logs, memory and disk inspection, and network diagnostics.
-
-🧰 Skills Practiced
-
-Area
-
-Current focus
-
-Linux Administration
-
-Services, processes, logs, storage, networking, troubleshooting
-
-Networking
-
-IP addressing, DNS, routing, ports, reverse proxies
-
-Containers
-
-Docker, Docker Compose, images, volumes, container networking
-
-CI/CD
-
-GitHub Actions, automated builds and tests, image publishing, deployment
-
-Version Control
-
-Git, branches, commits, merges, repository management
-
-Remote Access
-
-SSH, Tailscale, private connectivity
-
-Cloud
-
-Microsoft Azure fundamentals and administration
-
-Infrastructure as Code
-
-Terraform — planned
-
-Configuration Management
-
-Ansible — planned
-
-Monitoring & Observability
-
-Uptime Kuma, Prometheus, Grafana — planned
-
-🛣️ Roadmap
-
-Completed
-
-Git and GitHub fundamentals
-
-Docker and Docker Compose basics
-
-Tailscale remote access and SSH
-
-Docker networking
-
-Homepage dashboard
-
-Nginx reverse proxy
-
-Containerized Python backend
-
-GitHub Actions CI/CD pipeline
-
-Automated Docker image publishing to GHCR
-
-Remote application deployment
-
-In Progress
-
-Strengthen Linux administration and troubleshooting
-
-Prepare for Microsoft Azure Administrator (AZ-104)
-
-Improve infrastructure documentation
-
-Planned
-
-Uptime Kuma for service availability monitoring
-
-Prometheus and Grafana for metrics and dashboards
-
-Ansible for configuration management
-
-Terraform for Infrastructure as Code
-
-Kubernetes fundamentals and application deployment
-
-Centralized logging and improved observability
-
-Secrets management and infrastructure security improvements
-
-📚 Learning Approach
-
-Each project is an opportunity to understand not only how to deploy a service, but also how it works, how to troubleshoot it, and how to improve its reliability and maintainability.
-
-The long-term goal is to evolve this homelab into a documented, automated, and observable infrastructure environment that reflects practical Infrastructure, Cloud, and DevOps engineering workflows.
-
+**Status:** Actively maintained and continuously evolving.
